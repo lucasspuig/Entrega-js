@@ -1,0 +1,10 @@
+[
+    { "id": 1, "name": "Cerveza", "price": 30, "img": "./assets/cerveza.png" },
+    { "id": 2, "name": "Campari", "price": 90, "img": "./assets/campari.png" },
+    { "id": 3, "name": "Fernet", "price": 90, "img": "./assets/fernetR.png" },
+    { "id": 4, "name": "Vino", "price": 180, "img": "./assets/vino.jpg" },
+    { "id": 5, "name": "Gin tonic", "price": 95, "img": "./assets/ee-3.jpg" },
+    { "id": 6, "name": "Vodka", "price": 90, "img": "./assets/vodka.jpeg" },
+    { "id": 7, "name": "Tequila", "price": 150, "img": "./assets/tequi.jpeg" },
+    { "id": 8, "name": "Whisky", "price": 100, "img": "./assets/red.jpeg" }
+]
