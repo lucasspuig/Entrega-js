@@ -3,13 +3,13 @@ const products = [
     { id: 2, name: 'Campari', price: 90, img: './assets/campari.png' },
     { id: 3, name: 'Fernet', price: 90, img: './assets/fernetR.png' },
     { id: 4, name: 'Vino', price: 180, img: './assets/vino.jpg' },
-    { id: 5, name: 'Gin tonic Premium', price: 95, img: './assets/ee-3.jpg' },
+    { id: 5, name: 'Gin tonic', price: 95, img: './assets/ee-3.jpg' },
     { id: 6, name: 'Vodka', price: 90, img: './assets/vodka.jpeg' },
-    { id: 7, name: 'Tequila', price: 150, img: './assets/tequila.jpg' },
-    { id: 8, name: 'Whiskey', price: 100, img: './assets/whiskey.jpg' },
+    { id: 7, name: 'Tequila', price: 150, img: './assets/tequi.jpeg' },
+    { id: 8, name: 'Whisky', price: 100, img: './assets/red.jpeg' },
 ];
 
-let allProducts = [];
+let allProducts = JSON.parse(localStorage.getItem('cart')) || []; // Cargar carrito desde localStorage
 
 const showHTML = () => {
     const rowProduct = document.querySelector('.row-product');
@@ -56,6 +56,9 @@ const showHTML = () => {
 
     valorTotal.innerText = `$${total}`;
     countProducts.innerText = totalOfProducts;
+
+    // Guardar carrito en localStorage
+    localStorage.setItem('cart', JSON.stringify(allProducts));
 };
 
 const addProduct = (id) => {
@@ -67,6 +70,16 @@ const addProduct = (id) => {
         allProducts.push({ ...productToAdd, quantity: 1 });
     }
     showHTML();
+    
+    // Alerta de confirmación
+    Swal.fire({
+        title: '¡Agregado!',
+        text: 'El producto ha sido agregado al carrito.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+        timer: 2000, // Duración en milisegundos
+        timerProgressBar: true,
+    });
 };
 
 const removeProduct = (id) => {
@@ -115,5 +128,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = 'https://www.example.com';
             });
         }
+    });
+
+    // Mostrar productos en el carrito al cargar la página
+    showHTML();
+
+    // Manejo del formulario de pedido
+    document.getElementById('order-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita que el formulario se envíe de manera tradicional
+
+        // Aquí puedes manejar la lógica para procesar el pedido
+        allProducts = []; // Limpia el carrito
+        localStorage.removeItem('cart'); // Limpiar el localStorage
+        showHTML(); // Actualiza la vista del carrito
+
+        // Muestra la alerta de compra exitosa
+        Swal.fire({
+            title: 'Compra Exitosa',
+            text: 'Tu pedido ha sido realizado con éxito.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        });
     });
 });
