@@ -7,6 +7,7 @@
     <title>Tienda de Bebidas</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
 </head>
 <body>
     <header>
@@ -30,26 +31,56 @@
             <p class="cart-empty">El carrito está vacío</p>
         </div>
     </header>
+	<main>
+		<section>
+			
+			<div class="container-items"></div>
 
-    <div class="container-items"></div>
-
-    <form id="order-form">
-        <h3>Datos de Envío</h3>
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name" required>
-        
-        <label for="lastname">Apellido:</label>
-        <input type="text" id="lastname" name="lastname" required>
-        
-        <label for="email">Correo Electrónico:</label>
-        <input type="email" id="email" name="email" required>
-        
-        <label for="address">Dirección de Envío:</label>
-        <textarea id="address" name="address" rows="3" required></textarea>
-        
-        <button type="submit">Enviar Pedido</button>
-    </form>
-
+			<form id="order-form">
+				<h3>Datos de Envío</h3>
+				<label for="name">Nombre:</label>
+				<input type="text" id="name" name="name" required>
+				
+				<label for="lastname">Apellido:</label>
+				<input type="text" id="lastname" name="lastname" required>
+				
+				<label for="email">Correo Electrónico:</label>
+				<input type="email" id="email" name="email" required>
+				
+				<label for="address">Dirección de Envío:</label>
+				<textarea id="address" name="address" rows="3" required></textarea>
+				
+				<button type="submit">Enviar Pedido</button>
+			</form>
+		</section>
+	</main>
+	<footer>
+		<div class="footer-content">
+			<div class="footer-section about">
+				<h3>Sobre Nosotros</h3>
+				<p>Somos la mejor tienda de bebidas, ofreciendo una amplia variedad de opciones para todos los gustos.</p>
+			</div>
+	
+			<div class="footer-section social">
+				<h3 class="foot">Síguenos</h3>
+				<div class="social-icons">
+					<a href="#" target="_blank">
+						<img src="https://cdn-icons-png.flaticon.com/512/733/733635.png" alt="Facebook" />
+					</a>
+					<a href="#" target="_blank">
+						<img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" />
+					</a>
+					<a href="#" target="_blank">
+						<img src="https://cdn-icons-png.flaticon.com/512/733/733611.png" alt="WhatsApp" />
+					</a>
+				</div>
+			</div>
+		</div>
+	
+		<div class="footer-bottom">
+			<p>&copy; 2024 Tienda de Bebidas. Todos los derechos reservados.</p>
+		</div>
+	</footer>	
     <script src="./js/main.js"></script>
 </body>
 </html>
