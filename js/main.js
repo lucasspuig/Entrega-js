@@ -77,7 +77,7 @@ const addProduct = (id) => {
         text: 'El producto ha sido agregado al carrito.',
         icon: 'success',
         confirmButtonText: 'Aceptar',
-        timer: 2000, // Duración en milisegundos
+        timer: 2000,
         timerProgressBar: true,
     });
 };
@@ -136,6 +136,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Manejo del formulario de pedido
     document.getElementById('order-form').addEventListener('submit', function(event) {
         event.preventDefault(); // Evita que el formulario se envíe de manera tradicional
+
+        const name = document.getElementById('name').value;
+        const lastname = document.getElementById('lastname').value;
+        const email = document.getElementById('email').value;
+        const address = document.getElementById('address').value;
+
+        // Validar que los campos no estén vacíos
+        if (!name || !lastname || !email || !address) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Todos los campos son obligatorios.',
+            });
+            return;
+        }
+
+        // Validar formato de correo electrónico
+        const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        if (!emailPattern.test(email)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor, ingresa un correo electrónico válido.',
+            });
+            return;
+        }
 
         // Aquí puedes manejar la lógica para procesar el pedido
         allProducts = []; // Limpia el carrito
