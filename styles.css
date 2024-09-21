@@ -32,13 +32,13 @@ header {
     right: -10px;
     background-color: #de6434;
     color: #fff;
-    width: 20px;
+    width: 40px;
     height: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    font-size: 12px;
+    border-radius: 60%;
+    font-size: 20px;
 }
 
 .container-cart-products {
@@ -55,16 +55,25 @@ header {
 
 .cart-product {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    align-items: center; 
     padding: 10px;
     border-bottom: 1px solid #ddd;
+}
+
+.cart-product img {
+    width: 60px; 
+    height: 60px; 
+    border-radius: 5px; 
+    margin-right: 10px; 
 }
 
 .info-cart-product {
     flex: 1;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
+}
+.info-cart-product{
+    font-size: 10px;
 }
 
 .item {
@@ -115,7 +124,6 @@ header {
     background-color: #c5532e;
 }
 
-/* Estilos para el formulario */
 #order-form {
     margin-right: 4%;
     background-color: #fff;
@@ -140,7 +148,6 @@ header {
 }
 
 #order-form button {
-    
     background-color: #de6434;
     color: #fff;
     border: none;
@@ -152,19 +159,17 @@ header {
 #order-form button:hover {
     background-color: #c5532e;
 }
-/* Estilo para el contenedor de productos */
+
 .container-items {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas con el mismo ancho */
+    grid-template-columns: repeat(2, 1fr); 
     padding: 20px;
-    }
+}
 
-    /* Ya tienes estilos para .item, pero puedes añadir un pequeño ajuste si es necesario */
-    .item {
+.item {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    margin: 10px 0; /* Ajuste para dar espacio vertical si es necesario */
-    }
-
+    margin: 10px 0; 
+}

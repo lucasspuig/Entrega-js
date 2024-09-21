@@ -5,37 +5,11 @@ const products = [
     { id: 4, name: 'Vino', price: 180, img: './assets/vino.jpg' },
     { id: 5, name: 'Gin tonic Premium', price: 95, img: './assets/ee-3.jpg' },
     { id: 6, name: 'Vodka', price: 90, img: './assets/vodka.jpeg' },
-    { id: 7, name: 'Tequila', price: 120, img: './assets/tequi.jpeg' },
-    { id: 8, name: 'Whisky', price: 170, img: './assets/red.jpeg' },
-    { id: 9, name: 'Ron', price: 170, img: './assets/ron.jpeg' },
-    { id: 10, name: 'Champagne', price: 170, img: './assets/donperig.jpg' },
+    { id: 7, name: 'Tequila', price: 150, img: './assets/tequila.jpg' },
+    { id: 8, name: 'Whiskey', price: 100, img: './assets/whiskey.jpg' },
 ];
 
-let allProducts = JSON.parse(localStorage.getItem('cart')) || [];
-const containerItems = document.querySelector('.container-items');
-
-const createProductCards = () => {
-    containerItems.innerHTML = '';
-
-    products.forEach(product => {
-        const productDiv = document.createElement('div');
-        productDiv.classList.add('item');
-        productDiv.id = `product-${product.id}`;
-
-        productDiv.innerHTML = `
-            <figure>
-                <img src="${product.img}" alt="${product.name}">
-            </figure>
-            <div class="info-product">
-                <h2>${product.name}</h2>
-                <p class="price">$${product.price}</p>
-                <button class="btn-add-cart">Añadir al carrito</button>
-            </div>
-        `;
-
-        containerItems.appendChild(productDiv);
-    });
-};
+let allProducts = [];
 
 const showHTML = () => {
     const rowProduct = document.querySelector('.row-product');
@@ -63,12 +37,13 @@ const showHTML = () => {
         containerProduct.classList.add('cart-product');
 
         containerProduct.innerHTML = `
+            <img src="${product.img}" alt="${product.name}">
             <div class="info-cart-product">
                 <span class="cantidad-producto-carrito">${product.quantity}</span>
                 <p class="titulo-producto-carrito">${product.name}</p>
                 <span class="precio-producto-carrito">$${product.price}</span>
             </div>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-close">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-close" onclick="removeProduct(${product.id})">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
         `;
@@ -83,70 +58,62 @@ const showHTML = () => {
     countProducts.innerText = totalOfProducts;
 };
 
-showHTML();
-
-containerItems.addEventListener('click', e => {
-    if (e.target.classList.contains('btn-add-cart')) {
-        const productElement = e.target.closest('.item');
-        const productId = parseInt(productElement.id.split('-')[1]);
-        const product = products.find(p => p.id === productId);
-
-        const productInCart = allProducts.find(p => p.id === product.id);
-        if (productInCart) {
-            productInCart.quantity++;
-        } else {
-            allProducts.push({ ...product, quantity: 1 });
-        }
-
-        localStorage.setItem('cart', JSON.stringify(allProducts));
-        showHTML();
+const addProduct = (id) => {
+    const productInCart = allProducts.find(product => product.id === id);
+    if (productInCart) {
+        productInCart.quantity++;
+    } else {
+        const productToAdd = products.find(product => product.id === id);
+        allProducts.push({ ...productToAdd, quantity: 1 });
     }
-});
-
-const validateAge = () => {
-    Swal.fire({
-        title: 'Ingrese su edad',
-        input: 'number',
-        inputAttributes: {
-            min: 0,
-            max: 100,
-            step: 1
-        },
-        showCancelButton: false,
-        confirmButtonText: 'Enviar',
-        allowOutsideClick: false,
-        inputValidator: (value) => {
-            if (!value || value < 18) {
-                return 'Debes ser mayor de edad para acceder a la tienda.';
-            }
-        }
-    }).then((result) => {
-        if (result.value && result.value >= 18) {
-            createProductCards();
-        } else {
-            window.location.href = 'https://www.example.com';
-        }
-    });
+    showHTML();
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    validateAge();
+const removeProduct = (id) => {
+    allProducts = allProducts.filter(product => product.id !== id);
+    showHTML();
+};
+
+const btnCart = document.querySelector('.container-cart-icon');
+const containerCartProducts = document.querySelector('.container-cart-products');
+
+btnCart.addEventListener('click', () => {
+    containerCartProducts.classList.toggle('hidden-cart');
 });
 
-const orderForm = document.querySelector('#order-form');
+document.addEventListener('DOMContentLoaded', () => {
+    const containerItems = document.querySelector('.container-items');
+    products.forEach(product => {
+        const item = document.createElement('div');
+        item.classList.add('item');
+        item.innerHTML = `
+            <figure>
+                <img src="${product.img}" alt="${product.name}">
+            </figure>
+            <div class="info-product">
+                <h2>${product.name}</h2>
+                <p>$${product.price}</p>
+                <button class="btn-add-cart" onclick="addProduct(${product.id})">Agregar al Carrito</button>
+            </div>
+        `;
+        containerItems.appendChild(item);
+    });
 
-orderForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
+    // Validación de edad
     Swal.fire({
-        title: 'Compra exitosa',
-        text: '¡Gracias por tu compra! Tu pedido ha sido procesado correctamente.',
-        icon: 'success',
-        confirmButtonText: 'OK'
-    }).then(() => {
-        orderForm.reset();
-        allProducts = [];
-        localStorage.setItem('cart', JSON.stringify(allProducts));
-        showHTML();
+        title: 'Verificación de Edad',
+        text: '¿Tienes más de 18 años?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Continuar
+        } else {
+            Swal.fire('Lo sentimos', 'Debes ser mayor de 18 años para acceder.', 'error').then(() => {
+                window.location.href = 'https://www.example.com';
+            });
+        }
     });
 });
