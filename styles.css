@@ -11,8 +11,7 @@ body {
     font-family: 'Lato', sans-serif;
     background-color: #f0f0f0;
     color: #333;
-    max-width: 1200px;
-    margin: 0 auto;
+    margin: 0; /* Asegúrate de que no haya margen en el body */
 }
 
 header {
@@ -72,7 +71,8 @@ header {
     display: flex;
     justify-content: space-between; 
 }
-.info-cart-product{
+
+.info-cart-product {
     font-size: 10px;
 }
 
@@ -173,17 +173,20 @@ header {
     transition: transform 0.3s ease;
     margin: 10px 0; 
 }
+
 footer {
     width: 100%;
     background-color: #de6434; /* Color de fondo del footer */
     color: #fff; /* Color de texto */
     padding: 20px 0; /* Espaciado superior e inferior */
+    position: relative; /* Asegura que el footer esté en el flujo normal del documento */
 }
 
 .footer-content {
     display: flex; /* Flexbox para secciones */
     justify-content: space-around; /* Espacio entre secciones */
-    margin-bottom: 20px; /* Espacio inferior */
+    max-width: 1200px; /* Ancho máximo del contenido */
+    margin: 0 auto; /* Centrar el contenido */
 }
 
 .footer-section {
@@ -199,6 +202,7 @@ footer {
     text-align: center; /* Centrar el texto */
     border-top: 1px solid #fff; /* Línea superior */
     padding-top: 10px; /* Espacio superior */
+    margin-top: 20px; /* Espacio superior del footer inferior */
 }
 
 .social-icons {
@@ -216,7 +220,8 @@ footer {
 .social-icons img:hover {
     transform: scale(1.1); /* Aumentar tamaño al pasar el mouse */
 }
-.foot{
+
+.foot {
     text-align: center;
     margin-bottom: 10%;
 }
